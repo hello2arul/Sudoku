@@ -1,25 +1,26 @@
 import pygame
-import sys
 from cube import Cube
 from constants import WIDTH, HEIGHT, ROWS, COLS, BLACK, CUBE_SIZE, RED, GREEN
-from solver import find_empty, is_valid_state
+from algorithms import find_empty, generate_random_board, is_valid_state
 
 
 
 class Board:
-    board = [
-    [7, 8, 0, 4, 0, 0, 1, 2, 0],
-    [6, 0, 0, 0, 7, 5, 0, 0, 9],
-    [0, 0, 0, 6, 0, 1, 0, 7, 8],
-    [0, 0, 7, 0, 4, 0, 2, 6, 0],
-    [0, 0, 1, 0, 5, 0, 9, 3, 0],
-    [9, 0, 4, 0, 6, 0, 0, 0, 5],
-    [0, 7, 0, 3, 0, 0, 0, 1, 2],
-    [1, 2, 0, 0, 0, 7, 4, 0, 0],
-    [0, 4, 9, 2, 0, 6, 0, 0, 7]
-]
+#     board = [
+#     [7, 8, 0, 4, 0, 0, 1, 2, 0],
+#     [6, 0, 0, 0, 7, 5, 0, 0, 9],
+#     [0, 0, 0, 6, 0, 1, 0, 7, 8],
+#     [0, 0, 7, 0, 4, 0, 2, 6, 0],
+#     [0, 0, 1, 0, 5, 0, 9, 3, 0],
+#     [9, 0, 4, 0, 6, 0, 0, 0, 5],
+#     [0, 7, 0, 3, 0, 0, 0, 1, 2],
+#     [1, 2, 0, 0, 0, 7, 4, 0, 0],
+#     [0, 4, 9, 2, 0, 6, 0, 0, 7]
+# ]
+    
 
     def __init__(self, screen, game_font, rows=ROWS, cols=COLS):
+        self.board = generate_random_board()
         self.screen = screen
         self.game_font = game_font
         self.cubes = [[Cube(screen, game_font, self.board[i][j], i, j, self.board[i][j] == 0) 
@@ -119,6 +120,8 @@ class Board:
         
         return False
 
+    def reset(self):
+        self.__init__(self.screen, self.game_font)
 
 
 

@@ -1,6 +1,5 @@
 import pygame
 import sys
-import time
 from constants import WHITE, BLACK, RED, WIDTH
 
 class GameManager:
@@ -21,6 +20,9 @@ class GameManager:
         self.screen.blit(text, (20, 560))
 
         board.draw()
+
+    def reset(self):
+        self.__init__(self.screen, self.game_font)
 
 
     def listen_for_events(self, board):
@@ -50,6 +52,11 @@ class GameManager:
                    self.key = 8
                 if event.key == pygame.K_9:
                     self.key = 9
+
+                if event.key == pygame.K_r:
+                    board.reset()
+                    self.reset()
+                    
 
                 if event.key == pygame.K_DELETE:
                     board.clear_cell()
